@@ -1,0 +1,70 @@
+.text-sm {
+    font-size:80% !important;
+}
+.text10 {
+    font-size: 10px !important;
+}
+
+
+.source{
+    font-family: 'Source sans pro'
+}
+.roboto{
+    font-family: 'Roboto';
+}
+.bg-l-gray {
+    background-color: var(--ion-color-primary) !important;
+}
+/* VC CALENDAR  */
+.vc-header, .vc-arrows-container {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+}
+.vc-header {
+    background-color: whitesmoke ;
+    margin: 4px !important;
+}
+.vc-arrows, .vc-svg-icon {
+    color: black !important ;
+}
+
+body {
+    overflow: hidden !important;
+}
+
+
+/* IONIC TAGS */
+ion-item{
+    --border-color:white !important;
+}
+ion-button{
+    --box-shadow: none !important;
+}
+ion-page{
+    background-color:white !important
+}
+ion-header {
+    background-image: none !important;
+    background: white;
+    /* border-bottom: 1px solid lightgray; */
+}
+ion-badge {
+    --padding-bottom:3px;
+    --padding-top:3px;
+    --padding-start:5px;
+    --padding-end:5px;
+    --box-shadow: none !important;
+}
+ion-toast {
+    --background: black !important;
+}
+
+/* OVERWRITE IONIC CLASSES */
+.alert-button {
+    color: gray !important
+}
+.alert-button-role-cancel {
+    color: red !important
+}
+
+/* PSEUDO CLASSES */
