@@ -21,20 +21,19 @@ export default defineComponent({
     IonRefresher,
     Menu
   },
-  async IonViewWillEnter(){
+  created(){
+    navigator.mediaDevices.getUserMedia({audio:true, video:true})
+    .then(() => {
+      return;
+    })
     const isLoggedIn = localStorage.getItem('token')
-    if(!isLoggedIn){
-      this.$router.push('/login')
-    }
-    else {
+    if(isLoggedIn){
       getProfile().then((data) => {
         localStorage.setItem("user", JSON.stringify(data.student_result))
       })
     }
-  },
-  mounted(){
-  },
-  setup(){
+    else
+      this.$router.push('/login')
   }
 });
 </script>

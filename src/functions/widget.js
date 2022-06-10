@@ -47,6 +47,9 @@ function showError(error) {
   
 function dismiss() {
   loading ? loading.dismiss() : ''
+  loadingController.getTop().then((load) => {
+    load.dismiss()
+  })
 }
 
 export { dismiss, openToast, showError, openLoading }

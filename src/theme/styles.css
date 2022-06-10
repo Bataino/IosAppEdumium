@@ -66,5 +66,7 @@ ion-toast {
 .alert-button-role-cancel {
     color: red !important
 }
-
+.sc-ion-loading-md{
+    color: gray !important;
+}
 /* PSEUDO CLASSES */

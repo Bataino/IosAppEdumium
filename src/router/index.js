@@ -42,6 +42,7 @@ const routes = [
   },
   {
     path: '/login',
+    name:"Login",
     component: () => import('@/views/Login.vue')
   },
   {
@@ -183,5 +184,18 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+// --eslint-disable-next-line
+// router.beforeEach((to, from, next) => {
+//   // console.log(to)
+//   if(!localStorage.getItem('token') && from.name !== "Login"){
+//     next({})
+//     return true;
+//   }
+//   else{
+//     next()
+//     return
+//   }
+// })
 
 export default router

@@ -1,4 +1,3 @@
-// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   root: true,
   env: {
@@ -8,15 +7,6 @@ module.exports = {
     'plugin:vue/vue3-essential',
     'eslint:recommended',
   ],
-  // plugins: [new MiniCssExtractPlugin("")],
-  // module: {
-  //   rules: [
-  //     {
-  //       test: /\.css$/i,
-  //       use: [ MiniCssExtractPlugin.loader, "css-loader" ],
-  //     },
-  //   ],
-  // },
   parserOptions: {
     ecmaVersion: 2020
   },

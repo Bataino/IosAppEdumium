@@ -237,14 +237,15 @@ export default {
             console.log('onDidDismiss resolved with role', role);
 
             if(role.role == "OK") {
+                // console.log("looged out")
                 this.logMeOut()
+                localStorage.clear()
             }
         },
         async logMeOut() {
             openLoading()
             const loggedOut = await logout()
             if(loggedOut) {
-                localStorage.clear()
                 location.href = '/login'
                 dismiss()
             }
