@@ -3,7 +3,7 @@
     <ion-header>
       <app-header title="Examination" />
     </ion-header>
-    <ion-content :fullscreen="true">
+    <ion-content >
       <list-component
         smalltitle=" "
         titleIcon="healthicons:i-exam-qualification"

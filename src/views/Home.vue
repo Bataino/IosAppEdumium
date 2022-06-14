@@ -3,7 +3,7 @@
     <ion-header>
         <app-header title="Home" />
     </ion-header>
-    <ion-content :fullscreen="true">
+    <ion-content>
         <ion-list>
             <ion-item class="mb-2 border-0 shadow-sm" lines="none" color="primary" @click="this.$router.push('/attendance')">
                 <icon icon="bi:calendar-check" width="29" slot="start" />

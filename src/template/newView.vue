@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <app-header title="" />
-    <ion-content :fullscreen="true">
+    <ion-content >
       <ion-header collapse="condense">
         <ion-toolbar>
           <ion-title size="large">Tab 3</ion-title>

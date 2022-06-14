@@ -3,7 +3,7 @@
     <ion-header>
       <app-header title="Apply Leave" :backButton="true" />
     </ion-header>
-    <ion-content :fullscreen="true">
+    <ion-content >
       <ion-list>
         <list-component
           bodyWidth="230px"

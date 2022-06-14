@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <app-header title="Routes" :backButton="true" />
-    <ion-content :fullscreen="true">
+    <ion-content >
       <list-component
         titleIcon="ion:git-network"
         height="50px"

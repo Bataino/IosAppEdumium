@@ -3,7 +3,7 @@
     <ion-header>
         <app-header title="HomeWork" />
     </ion-header>
-    <ion-content :fullscreen="true">
+    <ion-content >
         <ion-list>
             <list-component v-for="work in homeWorks" :title="work.name" :smalltitle="work.class +' '+ work.section" bodyWidth="" :key="work">
                 <template v-slot:header-end>

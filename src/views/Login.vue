@@ -1,6 +1,6 @@
 <template>
 <ion-page>
-    <ion-content :fullscreen="true">
+    <ion-content >
         <div class="h-100 w-100 d-flex align-items-center justify-content-center">
             <form @submit.prevent="login" color="secondary" class="ion-padding-horizontal w-100">
                 <ion-input v-model="user.username" class="border w-100 bg-white rounded small px-2 mb-3" placeholder="Username" />

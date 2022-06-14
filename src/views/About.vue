@@ -3,7 +3,7 @@
     <ion-header>
         <app-header title="About" :backButton="true" />
     </ion-header>
-    <ion-content :fullscreen="true">
+    <ion-content >
         <div id="" class="d-block p-0 m-0 w-100 shadow-sm  ion-no-padding" lines="" style="overflow:show" color="">
             <div class="d-block small mx-0 px-0 w-100" style="">
                 <div class="d-flex  bg-l-gray p-3  align-items-center border-bottom ion-padding-horizontal ion-primary pb-2" color="danger">
