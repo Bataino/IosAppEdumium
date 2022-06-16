@@ -97,6 +97,7 @@ export default {
                     task_id:id,
                 })
                 .then(()=> {
+                    dismiss()
                     openToast('User update successfully')
                     location.reload()
                 })
@@ -111,6 +112,7 @@ export default {
                     task_id:id,
                 })
                 .then(()=> {
+                    dismiss()
                     openToast('Task update successful')
                     location.reload()
                 })
@@ -142,8 +144,8 @@ export default {
         getTask().then((data) => {
             this.tasks = data.tasks
             // this.tasks = this.result
+            dismiss()
         })
-        dismiss()
 
     }
 };

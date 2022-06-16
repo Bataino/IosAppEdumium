@@ -16,7 +16,7 @@
             <ion-icon :icon="menu" class="h-100" ></ion-icon>
         </ion-button>
     </ion-buttons>
-    <ion-buttons slot="end" v-if="!backButton">
+    <ion-buttons slot="end" v-if="!backButton && !isMenu">
         <ion-button class="text-dark">
             <icon icon="clarity:notification-solid" class="text-dark h-100"  />
         </ion-button>

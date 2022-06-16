@@ -24,7 +24,8 @@
           >
             Class teacher
           </ion-badge>
-          <review-star style="max-width: 70px" :review="teacher.rate" />
+          <review-star style="max-width: 70px" :review="teacher.rate" v-if="teacher.rate" />
+          <review-star style="max-width: 70px" v-else @click="openReview(teacher)"/>
         </template>
         <div class="my-auto py-2">
           <div class="d-flex">
@@ -59,6 +60,10 @@
           </div>
         </template>
       </list-component>
+
+
+
+
       <ion-modal
         :is-open="modal.isOpen"
         :breakpoints="[0.1, 0.5, 1]"
@@ -106,15 +111,53 @@
           </table>
         </ion-content>
       </ion-modal>
+
+
+
+      <ion-modal
+        :is-open="review.isOpen"
+        :breakpoints="[0.1, 0.5, 1]"
+        :initialBreakpoint="0.5"
+        @didDismiss="closeReview"
+      >
+        <ion-header color="primary">
+          <ion-toolbar>
+            <ion-title> Review Staff </ion-title>
+            <ion-buttons slot="end">
+              <ion-button>
+                <icon
+                  class="ion-f/loat-end text-dark"
+                  icon="ion:close"
+                  @click="closeReview"
+                />
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding text-sm small">
+          <form class="" @submit.prevent="addReview">
+            <review-star v-model="review.rate" :editMode="true" />
+            <ion-input v-model="review.comment" placeholder="Comment.." class="border rounded mt-2 mb-3" style="min-height:70px" required/>
+            <ion-button type="submit" v-if="Number(review.rate)" color="secondary" class="text-success">
+              Submit
+            </ion-button>
+            <ion-button v-else disabled>
+              Submit
+            </ion-button>
+          </form>
+        </ion-content>
+      </ion-modal>
+
     </ion-content>
   </ion-page>
 </template>
 
 <script>
 import ReviewStar from "@/components/ReviewStar";
-import { openLoading, dismiss } from "@/functions/widget";
+import { openLoading, dismiss, openToast } from "@/functions/widget";
 import { getTeachersList } from "@/services/student";
-import { IonModal, IonTitle, IonToolbar, IonButtons, IonButton } from "@ionic/vue";
+import { IonModal, IonTitle, IonToolbar, IonButtons, IonButton, IonInput } from "@ionic/vue";
+import { addTeacherReview } from '../services/student';
 
 export default {
   name: "TeacherReview",
@@ -125,6 +168,7 @@ export default {
     IonToolbar,
     IonButtons,
     IonButton,
+    IonInput
   },
   data() {
     return {
@@ -133,6 +177,12 @@ export default {
         isOpen: false,
         data: [],
       },
+      review: {
+          isOpen: false,
+          rate:'',
+          comment:'',
+          teacher:{}
+        }
       // data: {
       //   result_list: {
       //     2: {
@@ -181,6 +231,32 @@ export default {
       this.modal.subjects = [];
       this.modal.isOpen = false;
     },
+    addReview() {
+      openLoading()
+      console.log("review", this.review)
+      addTeacherReview({
+        staff_id: this.review.teacher.staff_id,
+        rate: this.review.rate,
+        // comment: this.review.comment
+      })
+      .then((data) => {
+        if(!data.status)
+          openToast(data.msg)
+        else
+          openToast("Staff has been reviewed")
+        this.closeReview()
+        dismiss()
+        location.reload()
+      })
+    },
+    openReview(teacher){
+      this.review.isOpen = true
+      this.review.teacher = teacher
+    },
+    closeReview(){
+      this.review = {}
+      this.review.isOpen = false
+    }
   },
   ionViewDidEnter() {
     openLoading();

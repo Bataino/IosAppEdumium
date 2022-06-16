@@ -360,6 +360,17 @@ export const getTeacherSubject = async (formdata) => {
     return response;
 }
 
+export const addTeacherReview = async (formdata) => {
+    const response = http.post('webservice/addStaffRating', {
+        user_id: localStorage.getItem("student_id"),
+        ...formdata
+    })
+        .then((res) => {
+            return res.data
+        })
+    return response;
+}
+
 export const getLibraryBookIssued = async (formdata) => {
     const response = http.post('webservice/getLibraryBookIssued', {
         studentId: localStorage.getItem("student_id"),
