@@ -76,7 +76,7 @@ export default {
     openLoading()
     getTimetable().then((data) => {
       this.timetable = data.timetable
-      this.timetable = this.result.timetable
+      // this.timetable = this.result.timetable
 
       dismiss()
     })

@@ -3,7 +3,8 @@ import { toastController, loadingController } from '@ionic/vue'
 var loading
 var toast
 
-async function openLoading(message, timeout = 300000, dismiss = true) {
+async function openLoading(message, timeout = 300000, dismiss = false) {
+  console.log("isloading", loading)
   loading = await loadingController
     .create({
       cssClass: 'century loading text-12',
@@ -45,11 +46,19 @@ function showError(error) {
   
   }
   
-function dismiss() {
-  loading ? loading.dismiss() : ''
-  loadingController.getTop().then((load) => {
+async function dismiss() {
+  // loading ? loading.dismiss() : ''
+  let load = await loadingController.getTop()
+  load.dismiss()
+  setTimeout(async function() {
+    let load = await loadingController.getTop()
     load.dismiss()
-  })
+  }, 2000)
+ 
+
+  // loadingController.getTop().then((load) => {
+  //   load.dismiss()
+  // })
 }
 
 export { dismiss, openToast, showError, openLoading }

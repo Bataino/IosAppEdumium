@@ -6,7 +6,8 @@
     
     <div class="d-flex align-items-center border shadow-sm mb-2 ion-padding-horizontal ion-primary pb-2 py-2" style="!important">
         <ion-thumbnail style="--size:100px">
-            <img src="https://www.focusedu.org/wp-content/uploads/2018/12/circled-user-male-skin-type-1-2.png" class="" />
+            <img v-if="user.guardian_pic" :src="this.$host + user.guardian_pic" class="" />
+            <img v-else src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png" class="" />
             <div class="small text-center ion-text-capitalize pb-1" style="font-size:80%;">
                 Father
             </div>
@@ -35,7 +36,8 @@
 
    <div class="d-flex align-items-center border shadow-sm mb-2 ion-padding-horizontal ion-primary pb-2" style="!important">
         <ion-thumbnail style="--size:100px" class="ion-margin-vertical">
-            <img src="https://www.focusedu.org/wp-content/uploads/2018/12/circled-user-male-skin-type-1-2.png" class="" />
+            <img v-if="user.mother_pic" :src="this.$host + user.mother_pic" class="" />
+            <img v-else src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png" class="" />
             <div class="small text-center ion-text-capitalize pb-1" style="font-size:80%;">
                 Mother
             </div>
@@ -63,9 +65,10 @@
 
     <!-- GUARDIAN -->
 
-    <div class="d-flex align-items-center border shadow-sm mb-2 ion-padding-horizontal ion-primary pb-2 py-2" color="danger" style="!important">
+    <div class="d-flex align-items-center border shadow-sm mb-2 ion-padding-horizontal ion-primary pb-2 py-2" color="danger" style="min-height:200px">
         <ion-thumbnail style="--size:100px">
-            <img src="https://www.focusedu.org/wp-content/uploads/2018/12/circled-user-male-skin-type-1-2.png" class="" />
+            <img v-if="user.guardian_pic" :src="this.$host + user.guardian_pic" class="" />
+            <img v-else src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png" class="" />
             <div class="small text-center ion-text-capitalize pb-1" style="font-size:80%;">
                Guardian
             </div>
@@ -111,7 +114,7 @@
 <script>
 
 import { IonPage, IonContent } from '@ionic/vue';
-
+import { getProfile } from "@/services/student"
 
 export default {
   name: 'ParentPage',
@@ -124,22 +127,20 @@ export default {
   data(){
       return {
          user: {
-                guardian_name:'Oliver Twist',
-                guardian_tel:'088 99 333 4',
-                guardian_occupation: 'Lawyer',
-                guardian_relation:'father',
-                guardian_mail:'batino@voxforem',
-                guardian_location:'West brok'
+                guardian_name:' ',
+                guardian_tel:' ',
+                guardian_occupation: ' ',
+                guardian_relation:' ',
+                guardian_mail:' ',
+                guardian_location:' '
               }
       }
   },
-  IonViewDidEnter() {
-    const user = JSON.parse(localStorage.getItem("user"))
-    //   this.guardian.forEach((value, key) => {
-
-    //   }) 
-
-    this.user = user 
+  ionViewDidEnter() {
+    getProfile().then((data) => {
+        this.user = data.student_result
+    })
+    // this.user = JSON.parse(this.$route.params.profile)
   }
 
 };

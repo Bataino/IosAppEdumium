@@ -3,7 +3,7 @@
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
-        <ion-tab-button v-for="tab in tabs" :key="tab.name" :tab="'/'+tab.name" @click="this.$router.push(tab.name)">
+        <ion-tab-button v-for="tab in tabs" :key="tab.name" :tab="'/'+tab.name" :href="tab.name">
           <ion-icon :icon="tab.icon" />
             <ion-label class="ion-text-capitalize">
               {{ tab.name }}
@@ -38,14 +38,18 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style>
   ion-icon, ion-tab-bar{
     padding: 5px;
   }
   ion-tab-button:focus {
-    color: black !important;
+    color: darkgray !important;
   }
   ion-tab-button:target {
     color: #428cff !important;
+}
+ion-tab-button.tab-selected {
+    color: #428cff !important;
+    --ion-color-base: blue !important;
 }
 </style>

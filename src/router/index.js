@@ -42,8 +42,15 @@ const routes = [
   },
   {
     path: '/login',
-    name:"Login",
-    component: () => import('@/views/Login.vue')
+    name: "Login",
+    component: () => import('@/views/Login.vue'),
+    beforeEnter: () => {
+      // reject the navigation
+      if(localStorage.getItem("token")){
+        return { path:"/home" }
+      }
+      return
+    },
   },
   {
     path: '/profile',
@@ -61,6 +68,7 @@ const routes = [
     children: [
       {
         path: 'parent',
+        name: "Profile",
         component: () => import('@/views/profile/Parent.vue')
       },
       {
@@ -79,7 +87,7 @@ const routes = [
   },
   {
     path: '/webview',
-    name:'WebView',
+    name: 'WebView',
     component: () => import('@/views/WebView.vue')
   },
   {
@@ -96,7 +104,7 @@ const routes = [
   },
   {
     path: '/syllabus/subject',
-    name:"SubjectSyllabus",
+    name: "SubjectSyllabus",
     component: () => import('@/views/syllabus/SubjectSyllabus.vue')
   },
 
@@ -107,12 +115,12 @@ const routes = [
   },
   {
     path: '/onlineexam/result',
-    name:"OnlineExamResult",
+    name: "OnlineExamResult",
     component: () => import('@/views/exam/OnlineExamResult.vue')
   },
   {
     path: '/exam/result',
-    name:"ExamResult",
+    name: "ExamResult",
     component: () => import('@/views/exam/Result.vue')
   },
   {
@@ -164,8 +172,8 @@ const routes = [
     component: () => import('@/views/TransportRoute.vue')
   },
   {
-  path: '/hostels',
-  component: () => import('@/views/Hostel.vue')
+    path: '/hostels',
+    component: () => import('@/views/Hostel.vue')
   },
   {
     path: '/about',
@@ -175,7 +183,7 @@ const routes = [
   // Upload Stuffs
   {
     path: '/homework/upload',
-    name:"UploadHomeWork",
+    name: "UploadHomeWork",
     component: () => import('@/views/homework/UploadHomeWork.vue')
   },
 ]
@@ -185,17 +193,6 @@ const router = createRouter({
   routes
 })
 
-// --eslint-disable-next-line
-// router.beforeEach((to, from, next) => {
-//   // console.log(to)
-//   if(!localStorage.getItem('token') && from.name !== "Login"){
-//     next({})
-//     return true;
-//   }
-//   else{
-//     next()
-//     return
-//   }
-// })
+
 
 export default router

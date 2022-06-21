@@ -94,6 +94,7 @@ export default {
         }
         else{
           openToast("File uploaded successfully")
+          location.reload()
         }
         dismiss()
 

@@ -7,13 +7,14 @@
         <div class="d-flex align-items-center border-bottom ion-padding-horizontal ion-primary pb-2" color="danger">
             <ion-thumbnail>
                 <img v-if="user.image" :src="this.$host + user.image" class="rounded-circle" />
-                <img v-else src="https://www.focusedu.org/wp-content/uploads/2018/12/circled-user-male-skin-type-1-2.png" class="" />
+                <img v-else src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png" class="" />
             </ion-thumbnail>
             <div class="d-flex ion-padding">
                 <ion-label class="century ion-padding-end ion-text-wrap ion-text-sm" style="font-size:80%;">
                     <b>{{  user.username ?? user.firstname + " " + user.lastname }}</b>
                     <br>
-                    Email: {{ user.email }}
+                    Email: {{ user.email }}<br />
+                    {{ user.class + " " + user.section }}
                 </ion-label>
             </div>
         </div>

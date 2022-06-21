@@ -31,7 +31,7 @@
       <ion-list style="margin-top:100px">
         <list-component  v-for="fee in fees" :key="fee" :title="fee.name+'-'+fee.type">
           <template v-slot:header-end>
-              <span class="text-primary small px-2 fw-bold" v-if="fee.status=='unpaid'">
+              <span class="text-primary small px-2 fw-bold" v-if="fee.status =='unpaid'">
                   <span class="fw-6">
                       $
                   </span>
@@ -90,8 +90,14 @@
             </span>
             <template v-slot:body-status>
               <ion-badge color="success" mode="md" v-if="fee.status=='paid'" class=" p-1 text-light text-sm" >Paid</ion-badge>
+              <ion-badge color="warning" mode="md" v-else-if="fee.status=='partial'" class=" p-1 text-light text-sm" >Partial</ion-badge>
               <ion-badge color="danger" mode="md" v-else class="small text-light text-sm p-1" >Unpaid</ion-badge>
           </template>
+        </list-component>
+      </ion-list>
+      
+      <ion-list>
+         <list-component  v-for="fee in discountFees" :key="fee.id" :title="'Discount-'+fee.code" :smalltitle="`Discount of ${this.$currency ?? ''} ${fee.amount} ${fee.status}- ${fee.payment_id}`" height="20">
         </list-component>
       </ion-list>
     </ion-content>
@@ -99,7 +105,6 @@
 </template>
 
 <script>
-/* eslint-disable */ 
 import { IonBadge } from '@ionic/vue';
 import { fees } from '@/services/student'
 import { dismiss, openLoading } from '@/functions/widget';
@@ -112,19 +117,32 @@ export default {
     data() {
         return {
             feesSummary:{},
-            fees: []
+            fees: [],
+            discountFees: []
+        }
+    },
+    methods:{
+        openFeeLink(fee){
+            this.$router.push({
+                name:"WebiVew",
+                params: {
+                    title:"Pay Fee "+ fee.title,
+                    url: this.$host + ""
+                }
+            })
         }
     },
     ionViewDidEnter(){
         openLoading()
         fees().then((data) => {
-            data.student_due_fee.forEach((element, index) => {
+            data.student_due_fee.forEach((element) => {
                 element.fees.forEach((fee) =>{
                     this.fees.push(fee)
                 })
+                dismiss()
             });
             this.feesSummary = data.grand_fee;
-            dismiss()
+            this.discountFees = data.student_discount_fee;
         })
     }
 };

@@ -108,7 +108,7 @@ export default {
   ionViewDidEnter() {
     getLibraryBookIssued().then((data) => {
       if (!data.success) {
-        openToast(data.errorMsg);
+        openToast(data.errorMsg ??"No books found for the user");
       } else {
         this.books = data.data
       }

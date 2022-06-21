@@ -79,6 +79,7 @@
 import { dashboard } from '@/services/student'
 import { openLoading, dismiss } from '../functions/widget';
 import { IonModal } from "@ionic/vue"
+import { useBackButton } from '@ionic/vue';
 
 export default {
     name: 'HomeTab',
@@ -143,6 +144,11 @@ export default {
         }
     },
     async ionViewDidEnter() {
+        useBackButton(10, () => {
+            navigator['app'].exitApp();
+            console.log('Handler was called!');
+        })
+        
         openLoading()
         const date = new Date()
         const year = date.getFullYear()
@@ -160,6 +166,19 @@ export default {
             this.studentSummary[1] = response.student_homework_incomplete
             this.studentSummary[2] = response.student_incomplete_task
         }
+
+        this.subscription = this.platform.backButton.subscribe(()=>{
+            navigator['app'].exitApp();
+        });
+        dismiss()
+    },
+    ionViewWillLeave(){
+         useBackButton(10, () => {
+            this.$router.go(-1)
+        })
+    },
+    created(){
+       
     }
 };
 </script>

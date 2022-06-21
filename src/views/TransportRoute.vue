@@ -98,7 +98,7 @@
 
 <script>
 import { getTransportRoute } from "@/services/student";
-import { openLoading } from "@/functions/widget";
+import { openLoading, dismiss } from "@/functions/widget";
 import { IonModal, IonButton, IonButtons, IonToolbar, IonTitle } from "@ionic/vue";
 
 export default {
@@ -117,172 +117,6 @@ export default {
         isOpen:false,
         data: {}
       },
-      result: [
-        {
-          id: "1",
-          route_title: "Brooklyn Central",
-          no_of_vehicle: null,
-          fare: "300.00",
-          note: null,
-          is_active: "no",
-          created_at: "2021-03-22 05:33:13",
-          updated_at: null,
-          vehicles: [
-            {
-              vec_route_id: "2",
-              id: "2",
-              vehicle_no: "VH5645",
-              vehicle_model: "Volvo Bus",
-              manufacture_year: "2018",
-              driver_name: "Maximus",
-              driver_licence: "545645666776",
-              driver_contact: "885456456",
-              note: "",
-              created_at: "2021-03-22 05:36:28",
-              assigned: "no",
-            },
-            {
-              vec_route_id: "1",
-              id: "1",
-              vehicle_no: "VH1001",
-              vehicle_model: "Volvo Bus",
-              manufacture_year: "2017",
-              driver_name: "Michel",
-              driver_licence: "R534534",
-              driver_contact: "8667777869",
-              note: "",
-              created_at: "2021-03-22 05:35:46",
-              assigned: "no",
-            },
-          ],
-        },
-        {
-          id: "2",
-          route_title: "Brooklyn East",
-          no_of_vehicle: null,
-          fare: "350.00",
-          note: null,
-          is_active: "no",
-          created_at: "2021-03-22 05:33:50",
-          updated_at: null,
-          vehicles: [
-            {
-              vec_route_id: "4",
-              id: "3",
-              vehicle_no: "VH4584",
-              vehicle_model: "Ford CAB",
-              manufacture_year: "2015",
-              driver_name: "Salman Ansari",
-              driver_licence: "258714545",
-              driver_contact: "8521479630",
-              note: "",
-              created_at: "2021-03-22 05:37:01",
-              assigned: "no",
-            },
-            {
-              vec_route_id: "3",
-              id: "1",
-              vehicle_no: "VH1001",
-              vehicle_model: "Volvo Bus",
-              manufacture_year: "2017",
-              driver_name: "Michel",
-              driver_licence: "R534534",
-              driver_contact: "8667777869",
-              note: "",
-              created_at: "2021-03-22 05:35:46",
-              assigned: "no",
-            },
-          ],
-        },
-        {
-          id: "3",
-          route_title: "Brooklyn West",
-          no_of_vehicle: null,
-          fare: "500.00",
-          note: null,
-          is_active: "no",
-          created_at: "2021-03-22 05:34:00",
-          updated_at: null,
-          vehicles: [
-            {
-              vec_route_id: "6",
-              id: "3",
-              vehicle_no: "VH4584",
-              vehicle_model: "Ford CAB",
-              manufacture_year: "2015",
-              driver_name: "Salman Ansari",
-              driver_licence: "258714545",
-              driver_contact: "8521479630",
-              note: "",
-              created_at: "2021-03-22 05:37:01",
-              assigned: "no",
-            },
-            {
-              vec_route_id: "5",
-              id: "2",
-              vehicle_no: "VH5645",
-              vehicle_model: "Volvo Bus",
-              manufacture_year: "2018",
-              driver_name: "Maximus",
-              driver_licence: "545645666776",
-              driver_contact: "885456456",
-              note: "",
-              created_at: "2021-03-22 05:36:28",
-              assigned: "no",
-            },
-          ],
-        },
-        {
-          id: "4",
-          route_title: "Brooklyn South",
-          no_of_vehicle: null,
-          fare: "400.00",
-          note: null,
-          is_active: "no",
-          created_at: "2021-03-22 05:34:23",
-          updated_at: null,
-          vehicles: [
-            {
-              vec_route_id: "7",
-              id: "2",
-              vehicle_no: "VH5645",
-              vehicle_model: "Volvo Bus",
-              manufacture_year: "2018",
-              driver_name: "Maximus",
-              driver_licence: "545645666776",
-              driver_contact: "885456456",
-              note: "",
-              created_at: "2021-03-22 05:36:28",
-              assigned: "no",
-            },
-          ],
-        },
-        {
-          id: "5",
-          route_title: "Brooklyn North",
-          no_of_vehicle: null,
-          fare: "480.00",
-          note: null,
-          is_active: "no",
-          created_at: "2021-03-22 05:34:46",
-          updated_at: null,
-          vehicles: [
-            {
-              vec_route_id: "8",
-              id: "2",
-              vehicle_no: "VH5645",
-              vehicle_model: "Volvo Bus",
-              manufacture_year: "2018",
-              driver_name: "Maximus",
-              driver_licence: "545645666776",
-              driver_contact: "885456456",
-              note: "",
-              created_at: "2021-03-22 05:36:28",
-              assigned: "yes",
-            },
-          ],
-        },
-      ],
     };
   },
   methods: {
@@ -299,7 +133,8 @@ export default {
     openLoading();
     getTransportRoute().then((data) => {
       this.routes = data;
-      this.routes = this.result;
+      // this.routes = this.result;
+      dismiss()
     });
   },
 };

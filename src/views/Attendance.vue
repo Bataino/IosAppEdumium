@@ -87,6 +87,7 @@ export default {
             dates: new Date(element.date),
           });
         });
+        dismiss()
       });
     },
   },

@@ -1,6 +1,6 @@
 <template>
   <ion-app>
-    <ion-refresher></ion-refresher>
+    <ion-refresher slot="fixed"></ion-refresher>
     <Menu />
     <ion-router-outlet />
   </ion-app>
@@ -32,8 +32,8 @@ export default defineComponent({
         localStorage.setItem("user", JSON.stringify(data.student_result))
       })
     }
-    else
-      this.$router.push('/login')
+    // else
+      // this.$router.push('/login')
   }
 });
 </script>

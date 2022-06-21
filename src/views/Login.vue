@@ -3,8 +3,8 @@
     <ion-content >
         <div class="h-100 w-100 d-flex align-items-center justify-content-center">
             <form @submit.prevent="login" color="secondary" class="ion-padding-horizontal w-100">
-                <ion-input v-model="user.username" class="border w-100 bg-white rounded small px-2 mb-3" placeholder="Username" />
-                <ion-input v-model="user.password" type="password" class="border w-100 bg-white rounded small px-2 mb-3" placeholder="******" />
+                <ion-input v-model="user.username" class="border w-100 bg-white rounded small px-2 mb-3" placeholder="Username" :required="true"/>
+                <ion-input v-model="user.password" type="password" class="border w-100 bg-white rounded small px-2 mb-3" placeholder="******" :required="true" />
                 <button class="btn-primary ion-padding-vertical w-100 rounded small" type="submit">
                     Login
                 </button>
@@ -16,7 +16,7 @@
 
 <script>
 import { IonInput } from '@ionic/vue'
-import { login, getProfile } from '@/services/student.js'
+import { login } from '@/services/student.js'
 import { openLoading, dismiss } from '@/functions/widget'
 
 export default {
@@ -36,20 +36,15 @@ export default {
             openLoading()
             const user = await login(this.user)
             if(user) {
-                getProfile().then((data) => {
-                    localStorage.setItem("user", JSON.stringify(data.student_result))
-                    location.href = '/home'
-                    dismiss()
-                })
+                console.log(user)
+                localStorage.setItem("user", JSON.stringify(user.record))
+                location.href = "/home"
             }
         }
     },
-    ionViewDidEnter() {
-        if(localStorage.getItem('token')){
-            this.$router.push('/')
-        }
+    created() {
         dismiss()
-    }
+    },
 }
 </script>
 

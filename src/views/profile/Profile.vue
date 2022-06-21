@@ -12,8 +12,9 @@
     <ion-content>
         <ion-tabs>
               <div class="d-flex align-items-center border-bottom ion-padding-horizontal ion-primary pb-2 py-2" color="danger" style="!important">
-                  <ion-thumbnail style="--size:100px">
-                      <img src="https://www.focusedu.org/wp-content/uploads/2018/12/circled-user-male-skin-type-1-2.png" class="" />
+                    <ion-thumbnail style="--size:100px">
+                        <img v-if="user.image" :src="this.$host + user.image" class="" />
+                        <img v-else src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png" class="" />
                   </ion-thumbnail>
                   <div class="d-flex ion-padding text-start">
                       <ion-label class="century ion-padding-end ion-text-wrap text-sm">
@@ -28,13 +29,13 @@
                   </div>
               </div>
           <ion-tab-bar slot="top" class="" color="primary">
-                <ion-tab-button @click="this.$router.push('/profile/personal')" class="ion-text-uppercase">
+                <ion-tab-button href="/profile/personal" class="ion-text-uppercase">
                     PERSONAL
                 </ion-tab-button>
-                <ion-tab-button @click="this.$router.push('/profile/parent')" class="ion-text-uppercase">
+                <ion-tab-button href="/profile/parents" class="ion-text-uppercase">
                     PARENTS
                 </ion-tab-button>
-                <ion-tab-button @click="this.$router.push('/profile/other')" class="ion-text-uppercase">
+                <ion-tab-button href="/profile/other" class="ion-text-uppercase">
                     OTHER
                 </ion-tab-button>
             </ion-tab-bar>
@@ -79,7 +80,7 @@ export default {
     created() {
         getProfile().then((data) => {
             this.user = data.student_result
-            localStorage.setItem("user", JSON.stringify(data))
+            localStorage.setItem("userProfile", JSON.stringify(data))
         })
         
     }

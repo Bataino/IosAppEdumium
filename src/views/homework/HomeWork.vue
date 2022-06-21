@@ -10,7 +10,9 @@
                     <a class="text-dark" v-if="work.document" :href="this.$host + 'uploads/homework/' + work.document" :download="work.document">
                         <icon icon="ic:round-file-download" height="20"/>
                     </a>
-                    <icon icon="ic:round-file-upload mx-2"  v-if="work.staff_evaluated == '0'" height="20" @click="uploadto(work)" />
+                    <div class="text-dark mx-2" >
+                        <icon icon="ic:round-file-upload" class="text-dark" v-if="work.staff_evaluated == '0'" height="20" @click="uploadto(work)" />
+                    </div>
                     <span class="text-primary small px-2" id="" @click="openHomeWork(work)">
                         <icon icon="ion:arrow-redo-sharp" height="20" />
                         view
@@ -58,7 +60,8 @@
         :is-open="modal.state"
         :breakpoints="[0.1, 0.5]"
         trigger="viewHomework"
-        :initialBreakpoint="0.5">
+        :initialBreakpoint="0.5"
+        @didDismiss="closeHomeWork">
             <ion-header color="primary" >
               <ion-toolbar>
                 <ion-title>
@@ -66,7 +69,7 @@
                 </ion-title>
                 <ion-buttons slot="end" >
                   <ion-button >
-                     <icon class="ion-f/loat-end text-dark" icon="ion:close" @click="this.modal.state = false; this.modal.data=[]" />
+                     <icon class="ion-f/loat-end text-dark" icon="ion:close" @click="closeHomeWork" />
                   </ion-button >
                 </ion-buttons>
               </ion-toolbar>
@@ -103,6 +106,10 @@ export default {
         openHomeWork(homeWork) {
             this.modal.state = true
             this.modal.data = homeWork.description
+        },
+        closeHomeWork(){
+            this.modal = {}
+            this.modal.state = false
         },
         isExpired(work){
             const today = new Date();

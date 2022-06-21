@@ -6,7 +6,7 @@
     <ion-content >
     <ion-card v-for="(course, index) in courses" :key="course.id" >
       <div class="" style="height:150px;overflow:hidden;position:relative">
-        <img :src="this.$host + 'uploads/course/course_thumbnail/' + course.course_thumbnail" class="w-100" >
+        <img :src="this.$host + 'uploads/course/course_thumbnail/' + course.course_thumbnail" alt="Course thumbnail" class="w-100" >
         <div class="position-absolute fixed-bottom px-2 bg-gray d-flex align-items-center" style="background:#0008" >
           <ion-thumbnail style="--size:50px" class="my-1">
             <img class="rounded-circle" :src="this.$host + 'uploads/staff_images/' + course.image" />
@@ -72,8 +72,9 @@
 
     <ion-modal 
       trigger="openDetail" 
-      :is-open="modal" 
-      :breakpoints="[1]">
+      :isOpen="modal" 
+      :breakpoints="[1]"
+      @didDismiss="closeModal">
       <ion-header color="primary" >
         <ion-toolbar>
           <ion-title>
@@ -88,11 +89,11 @@
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-content>
+      <ion-content class="overflow-auto pb-4 ">
         <div class="shadow-sm" style="height:150px;overflow:hidden;position:relative">
           <img :src="this.$host + 'uploads/course/course_thumbnail/' + courseDetail.course_thumbnail" class="h-100 w-100 position-absolutr" >
         </div>
-        <div class="p-2 m-3 bg-gray d-flex align-items-center shadow-sm" style="back-ground:#0008" >
+        <div class="p-2 m-2 bg-gray d-flex align-items-center shadow-sm" style="back-ground:#0008" >
             <ion-thumbnail style="--size:50px" class="my-1">
               <img class="rounded-circle" :src="this.$host + 'uploads/staff_images/' + courseDetail.image" />
               </ion-thumbnail>
@@ -103,7 +104,10 @@
               </span>
             </div>
           </div>
-        <div class="p-3 mx-3 shadow-sm text-sm small" >
+          <div class="m-2" v-if="courseDetail.course_provider == 'youtube'">
+            <iframe class="w-100" height="315" :src="'https://www.youtube.com/embed/'+courseDetail.video_id" frameborder="0" allowfullscreen></iframe>
+          </div>
+        <div class="p-3 mx-3 shadow-sm text-sm small mb-5" >
           <b class="fs-6">
             Course Description
           </b>
