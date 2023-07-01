@@ -26,7 +26,8 @@ export default defineComponent({
     .then(() => {
       return;
     })
-    const isLoggedIn = localStorage.getItem('token')
+    // Set to Always true
+    const isLoggedIn = localStorage.getItem('token') ?? true
     if(isLoggedIn){
       getProfile().then((data) => {
         localStorage.setItem("user", JSON.stringify(data.student_result))
