@@ -5,7 +5,7 @@ import Profile from '@/views/profile/Profile.vue'
 const routes = [
   {
     path: '/',
-    redirect: '/login'
+    redirect: '/home'
   },
 
 
