@@ -3,7 +3,7 @@ import { showError, dismiss } from "@/functions/widget";
 
 // const baseURL = 'http://localhost/voxforem/edumiumschoolgit-main/api/'
 const baseURL = 'https://appdemo.smart-school.in/api/webservice/dashboard'
-const baseURL = process.env.VUE_APP_API_HOST + "api/"
+// const baseURL = process.env.VUE_APP_API_HOST + "api/"
 const token = localStorage.getItem('token');
 const userID = localStorage.getItem('user-ID');
 const studentID = localStorage.getItem('student_id');
